@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dullz Store</title>
+    <link rel="icon" href="https://files.catbox.moe/2tvtjo.jpg" type="image/jpeg">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: url('https://files.catbox.moe/95xjh7.jpg') no-repeat center center fixed;
+            background-size: cover;
+        }
+
+        header {
+            background: rgba(51, 51, 51, 0.8);
+            color: white;
+            padding: 15px 0;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin: 0;
+            font-weight: bold;
+            letter-spacing: 2px;
+            opacity: 0; /* Awalnya tidak terlihat */
+            transform: translateY(-20px); /* Awalnya di atas */
+            transition: opacity 0.5s ease, transform 0.5s ease; /* Transisi */
+        }
+
+        .clock {
+            font-size: 1.5em;
+            margin-top: 10px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-top: 20px;
+            color: #BF0426;
+        }
+
+        .product-card {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px;
+            text-align: center;
+            display: inline-block;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .product-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .product-card img {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+
+        button {
+            position: relative;
+            font-size: 1.2em;
+            padding: 0.7em 1.4em;
+            background-color: #BF0426;
+            text-decoration: none;
+            border: none;
+            border-radius: 0.5em;
+            color: #DEDEDE;
+            box-shadow: 0.5em 0.5em 0.5em rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        button::before {
+            position: absolute;
+            content: '';
+            height: 0;
+            width: 0;
+            top: 0;
+            left: 0;
+            background: linear-gradient(135deg, rgba(33,33,33,1) 0%, rgba(33,33,33,1) 50%, rgba(150,4,31,1) 50%, rgba(191,4,38,1) 60%);
+            border-radius: 0 0 0.5em 0;
+            box-shadow: 0.2em 0.2em 0.2em rgba(0, 0, 0, 0.3);
+            transition: 0.3s;
+        }
+
+        button:hover::before {
+            width: 1.6em;
+            height: 1.6em;
+        }
+
+        button:active {
+            box-shadow: 0.2em 0.2em 0.3em rgba(0, 0, 0, 0.3);
+            transform: translate(0.1em, 0.1em);
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px 0;
+            background: #333;
+            color: white;
+            margin-top: 20px;
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        footer p {
+            margin: 5px 0;
+            font-size: 0.9em;
+        }
+
+        #contact {
+            text-align: center;
+        }
+
+        .share-button {
+            background-color: #25D366; /* Style untuk tombol bagikan */
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1 id="store-title">DULLZ STORE</h1>
+        <div class="clock" id="clock"></div>
+    </header>
+
+    <main>
+        <section id="products">
+            <h2>produk jb dullz</h2>
+            <div class="product-card" data-name="Produk 1" id="product-1">
+                <img src="https://files.catbox.moe/ft1jel.jpg" alt="Produk 1">
+                <h3>Produk 1</h3>
+                <p>JASTEB/UNCHEK PREMIUM</p>
+                <button onclick="addToCart('Produk 1')">Beli Sekarang</button>
+                <button class="share-button" onclick="shareProduct('Produk 1')">Bagikan Produk</button>
+            </div>
+            <div class="product-card" data-name="Produk 2" id="product-2">
+                <img src="https://files.catbox.moe/du9fsn.jpeg" alt="Produk 2">
+                <h3>Produk 2</h3>
+                <p>PANEL RUN BOT WHATSAAPP PRIVAT / PUBLIC</p>
+                <button onclick="addToCart('Produk 2')">Beli Sekarang</button>
+                <button class="share-button" onclick="shareProduct('Produk 2')">Bagikan Produk</button>
+            </div>
+            <div class="product-card" data-name="Produk 3" id="product-3">
+                <img src="https://files.catbox.moe/zxusoy.jpg" alt="Produk 3">
+                <h3>Produk 3</h3>
+                <p>LIST NOKOS DULLZ STORE N NOKOS LAIN? CONTACT ME</p>
+                <button onclick="addToCart('Produk 3')">Beli Sekarang</button>
+                <button class="share-button" onclick="shareProduct('Produk 3')">Bagikan Produk</button>
+            </div>
+        </section>
+
+        <section id="contact">
+            <h2>Kontak Kami</h2>
+            <p>Klik tombol di bawah untuk bergabung ke grup jb dullz</p>
+            <a href="https://chat.whatsapp.com/Bnj4IVkxmek10UmiqtQaFt" class="whatsapp-button">
+                <button>Klik di sini!</button>
+            </a>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Dullz Store</p>
+    </footer>
+
+    <script>
+        function addToCart(productName) {
+            const message = `Saya ingin membeli produk: ${productName}`;
+            const phoneNumber = '6288973673196';
+            const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+            window.open(whatsappURL, '_blank');
+        }
+
+        function shareProduct(productName) {
+            const currentURL = window.location.href.split('#')[0]; // Ambil URL saat ini tanpa hash
+            const productID = encodeURIComponent(productName);
+            const shareLink = `${currentURL}#product=${productID}`; // Buat tautan berbagi berdasarkan URL saat ini
+            prompt("Salin link untuk membagikan produk ini:", shareLink);
+        }
+
+        function showProductFromHash() {
+            const hash = window.location.hash;
+            if (hash.startsWith("#product=")) {
+                const productID = decodeURIComponent(hash.split('=')[1]);
+                const productCard = document.getElementById(`product-${productID.split(' ')[1]}`);
+                const allCards = document.querySelectorAll('.product-card');
+                
+                allCards.forEach(card => card.style.display = 'none'); // Sembunyikan semua kartu
+                if (productCard) {
+                    productCard.style.display = 'block'; // Tampilkan produk tertentu
+                    productCard.classList.add('visible'); // Buat agar terlihat
+                }
+            }
+        }
+
+        function updateClock() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString();
+            document.getElementById('clock').textContent = timeString;
+        }
+
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const storeTitle = document.getElementById('store-title');
+            storeTitle.style.opacity = 1; 
+            storeTitle.style.transform = 'translateY(0)';  
+            const productCards = document.querySelectorAll('.product-card');
+            productCards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.classList.add('visible');
+                }, index * 300);
+            });
+
+            showProductFromHash(); 
+        });
+    </script>
+</body>
+</html>
